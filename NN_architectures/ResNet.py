@@ -1,12 +1,9 @@
 import numpy as np
 from keras.applications.resnet50 import ResNet50, decode_predictions
 
-from utils import prepare_image
 
-
-def predict():
+def predict(image):
     model = ResNet50()
-    image = prepare_image(224, 224)
 
     pred = model.predict(image)
     decoded_predictions = decode_predictions(pred, top=10)
