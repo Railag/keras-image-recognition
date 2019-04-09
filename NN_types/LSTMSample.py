@@ -3,34 +3,27 @@ from keras.layers import LSTM
 from keras.models import Sequential
 from numpy import array
 
-
-def split_sequence(sequence, n_steps):
-    X, y = list(), list()
-    for i in range(len(sequence)):
-        end_ix = i + n_steps
-        if end_ix > len(sequence) - 1:
-            break
-        seq_x, seq_y = sequence[i:end_ix], sequence[end_ix]
-        X.append(seq_x)
-        y.append(seq_y)
-    return array(X), array(y)
+from constants import n_features, n_steps
+from utils import split_sequence
 
 
-def predict(training_input, test_input):
-    n_steps = 3
-
-    X, y = split_sequence(training_input, n_steps)
-
-    n_features = 1
-
-    X = X.reshape((X.shape[0], X.shape[1], n_features))
-
+def fit_model(X, y):
     model = Sequential()
     model.add(LSTM(50, activation='relu', input_shape=(n_steps, n_features)))
     model.add(Dense(1))
     model.compile(optimizer='adam', loss='mse')
 
     model.fit(X, y, epochs=200, verbose=0)
+
+    return model
+
+
+def predict(training_input, test_input):
+    X, y = split_sequence(training_input, n_steps)
+
+    X = X.reshape((X.shape[0], X.shape[1], n_features))
+
+    model = fit_model(X, y)
 
     x_input = array(test_input)
     x_input = x_input.reshape((1, n_steps, n_features))
