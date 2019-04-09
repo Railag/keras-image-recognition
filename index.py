@@ -1,3 +1,5 @@
+import os
+
 from NN_architectures.InceptionV3 import predict as InceptionV3_predict
 from NN_architectures.MobileNet import predict as MobileNet_predict
 from NN_architectures.MobileNetV2 import predict as MobileNetV2_predict
@@ -8,8 +10,12 @@ from NN_architectures.Xception import predict as Xception_predict
 ###
 from NN_types.CNNSample import predict as CNN_predict
 from NN_types.LSTMSample import predict as LSTM_predict
-
 from utils import prepare_image
+
+# hiding tensorflow logs
+import tensorflow as tf
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+tf.logging.set_verbosity(tf.logging.ERROR)
 
 
 def time_series(training_input, test_input):
