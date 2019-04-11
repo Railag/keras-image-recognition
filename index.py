@@ -21,6 +21,8 @@ from NN_types.MLP import predict as MLP_predict
 from NN_types.RNN import predict as RNN_predict
 from datasets.average_temperature import training_data as average_temperature_training_data, test_data as \
     average_temperature_test_data
+from datasets.electric_production import training_data as electric_production_training_data, test_data as \
+    electric_production_test_data
 from utils import prepare_image
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
@@ -71,3 +73,7 @@ print("NN types")
 training_input_3 = average_temperature_training_data
 test_input_3 = average_temperature_test_data
 time_series(training_input_3, test_input_3)
+
+training_input_4 = electric_production_training_data
+test_input_4 = electric_production_test_data
+time_series(training_input_4, test_input_4)
