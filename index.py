@@ -8,8 +8,10 @@ from NN_architectures.VGG16 import predict as VGG16_predict
 from NN_architectures.VGG19 import predict as VGG19_predict
 from NN_architectures.Xception import predict as Xception_predict
 ###
-from NN_types.CNNSample import predict as CNN_predict
-from NN_types.LSTMSample import predict as LSTM_predict
+from NN_types.CNN import predict as CNN_predict
+from NN_types.LSTM import predict as LSTM_predict
+from NN_types.GRU import predict as GRU_predict
+from NN_types.MLP import predict as MLP_predict
 from utils import prepare_image
 
 # hiding tensorflow logs
@@ -19,9 +21,12 @@ tf.logging.set_verbosity(tf.logging.ERROR)
 
 
 def time_series(training_input, test_input):
+    print("\n")
     print("Input: " + str(test_input))
     LSTM_predict(training_input, test_input)
     CNN_predict(training_input, test_input)
+    GRU_predict(training_input, test_input)
+    MLP_predict(training_input, test_input)
     # TODO more NN types predictions
 
 
