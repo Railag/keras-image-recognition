@@ -15,7 +15,7 @@ def fit_model(X, y):
 
     history = model.fit(X, y, validation_split=0.25, epochs=200, verbose=1)
 
-    visualize_history(history)
+    # visualize_history(history)
 
     return model
 
