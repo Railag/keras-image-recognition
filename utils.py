@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 from keras.applications.imagenet_utils import preprocess_input
 from keras.preprocessing.image import img_to_array, load_img
 from numpy import array
@@ -21,3 +22,23 @@ def split_sequence(sequence, n_steps):
         X.append(seq_x)
         y.append(seq_y)
     return array(X), array(y)
+
+
+def visualize_history(history):
+    # Plot training & validation accuracy values
+    plt.plot(history.history['acc'])
+    plt.plot(history.history['val_acc'])
+    plt.title('Model accuracy')
+    plt.ylabel('Accuracy')
+    plt.xlabel('Epoch')
+    plt.legend(['Train', 'Test'], loc='upper left')
+    plt.show()
+
+    # Plot training & validation loss values
+    plt.plot(history.history['loss'])
+    plt.plot(history.history['val_loss'])
+    plt.title('Model loss')
+    plt.ylabel('Loss')
+    plt.xlabel('Epoch')
+    plt.legend(['Train', 'Test'], loc='upper left')
+    plt.show()

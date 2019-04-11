@@ -4,16 +4,18 @@ from keras.models import Sequential
 from numpy import array
 
 from constants import n_features, n_steps
-from utils import split_sequence
+from utils import split_sequence, visualize_history
 
 
 def fit_model(X, y):
     model = Sequential()
     model.add(LSTM(50, activation='relu', input_shape=(n_steps, n_features)))
     model.add(Dense(1))
-    model.compile(optimizer='adam', loss='mse')
+    model.compile(optimizer='adam', loss='mse', metrics=['acc', 'mse', 'mae', 'mape', 'cosine'])
 
-    model.fit(X, y, epochs=200, verbose=0)
+    history = model.fit(X, y, validation_split=0.25, epochs=200, verbose=1)
+
+    visualize_history(history)
 
     return model
 
