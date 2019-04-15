@@ -60,7 +60,12 @@ tensorboard = TensorBoard(batch_size=batch_size,
                           embeddings_freq=1,
                           embeddings_layer_names=['features'],
                           embeddings_metadata='metadata.tsv',
-                          embeddings_data=x_test)
+                          embeddings_data=x_test,
+                          write_graph=True,
+                          write_images=True,
+                          write_grads=True,
+                          histogram_freq=1,
+                          update_freq='batch')
 
 model = Sequential()
 model.add(Conv2D(32, kernel_size=(3, 3),
@@ -76,7 +81,7 @@ model.add(Dense(num_classes, activation='softmax'))
 
 model.compile(loss=keras.losses.categorical_crossentropy,
               optimizer=keras.optimizers.Adadelta(),
-              metrics=['accuracy'])
+              metrics=['acc', 'mse', 'mae', 'mape', 'cosine'])
 
 model.fit(x_train, y_train,
           batch_size=batch_size,
