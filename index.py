@@ -24,6 +24,7 @@ from datasets.average_temperature import training_data as average_temperature_tr
 from datasets.electric_production import training_data as electric_production_training_data, test_data as \
     electric_production_test_data
 from utils import prepare_image
+from ui_utils import display_ui_image, add_text, set_text
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 tf.logging.set_verbosity(tf.logging.ERROR)
@@ -40,23 +41,28 @@ def time_series(training_input, test_input):
 
 
 def image_feature_recognition(image_path):
+    display_ui_image(image_path, 224, 224)
+
     image224 = prepare_image(image_path, 224, 224)
     image299 = prepare_image(image_path, 299, 299)
     image331 = prepare_image(image_path, 331, 331)
 
-    VGG16_predict(image224)
-    VGG19_predict(image224)
-    ResNet50_predict(image224)
-    InceptionV3_predict(image299)
-    Xception_predict(image299)
-    MobileNet_predict(image224)
-    MobileNetV2_predict(image224)
-    DenseNet_predict(image224)
-    NASNetLarge_predict(image331)
-    NASNetMobile_predict(image224)
+    set_text('')
+    add_text(VGG16_predict(image224))
+    add_text(VGG19_predict(image224))
+    add_text(ResNet50_predict(image224))
+    add_text(InceptionV3_predict(image299))
+    add_text(Xception_predict(image299))
+    add_text(MobileNet_predict(image224))
+    add_text(MobileNetV2_predict(image224))
+    add_text(DenseNet_predict(image224))
+    add_text(NASNetLarge_predict(image331))
+    add_text(NASNetMobile_predict(image224))
 
 
 print("NN architectures")
+# TODO launch with some dataset (add UI and next button, display current image
+#  and its labels under for each neural net architecture)
 # image_feature_recognition('test.jpg')
 image_feature_recognition('madrid.jpg')
 

@@ -42,3 +42,4 @@ def visualize_history(history):
     plt.xlabel('Epoch')
     plt.legend(['Train', 'Test'], loc='upper left')
     plt.show()
+
