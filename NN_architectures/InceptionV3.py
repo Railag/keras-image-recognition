@@ -7,7 +7,8 @@ def predict(image):
 
     pred = model.predict(image)
     decoded_predictions = decode_predictions(pred, top=10)
-    print('InceptionV3 predictions:', decoded_predictions[0])
+    response = 'InceptionV3 predictions:   ' + str(decoded_predictions[0][0:5])
+    print(response)
     np.argmax(pred[0])
-    return decoded_predictions[0]
+    return response
 
